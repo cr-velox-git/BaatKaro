@@ -9,9 +9,10 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './MainTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
+import ChatRoomScreen from '../screens/ChatRoomScreen';
 
 //icons import
-import { Feather } from '@expo/vector-icons';
+import { Feather, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
 // If you are not familiar with React Navigation, we recommend going through the
@@ -33,11 +34,11 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{
-      headerStyle:{
+      headerStyle: {
         backgroundColor: Colors.light.tint,
         shadowOpacity: 0,
         elevation: 0,
-      }, 
+      },
       headerTintColor: Colors.light.background,
       headerTitleAlign: 'left',
       headerTitleStyle: {
@@ -46,20 +47,41 @@ function RootNavigator() {
       }
     }}>
       <Stack.Screen name="Root" component={BottomTabNavigator}
-      options={{title: "BaatKaro",
-      headerRight: () => (
-        <View style={{
-          backgroundColor: Colors.light.tint, 
-          flexDirection:'row',
-          width: 60,
-          marginRight: 10,
-          justifyContent: 'space-between',
-        }}>
-          <Feather name="search" size={24} color="white" />
-          <Entypo name="dots-three-vertical" size={24} color="white" />
-        </View>
-      )
-      }} />
+        options={{
+          title: "BaatKaro",
+          headerRight: () => (
+            <View style={{
+              backgroundColor: Colors.light.tint,
+              flexDirection: 'row',
+              width: 60,
+              marginRight: 10,
+              justifyContent: 'space-between',
+            }}>
+              <Feather name="search" size={24} color="white" />
+              <Entypo name="dots-three-vertical" size={24} color="white" />
+            </View>
+          )
+        }} />
+      <Stack.Screen
+        name="ChatRoomScreen"
+        component={ChatRoomScreen}
+        options={({ route }) => ({
+          title: route.params.name,
+          headerRight: () => (
+            <View style={{
+              backgroundColor: Colors.light.tint,
+              flexDirection: 'row',
+              width: 100,
+              marginRight: 10,
+              justifyContent: 'space-between',
+            }}>
+              <MaterialIcons name="call" size={22} color={'white'}  />
+              <FontAwesome5 name="video" size={22} color={'white'} />
+              <Entypo name="dots-three-vertical" size={22} color={'white'} />
+            </View>
+          ),
+        })}
+      />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
