@@ -32,7 +32,10 @@ userName: {
     fontWeight: 'bold',
     fontSize: 16,
 },
-
+status: {
+    fontSize: 14,
+    color: 'gray'
+},
 });
 
 export default styles;

@@ -1,0 +1,38 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-baatkaro-dev-130250-authRole",
+      "UnauthRoleArn": "arn:aws:iam::422187193745:role/amplify-baatkaro-dev-130250-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::422187193745:role/amplify-baatkaro-dev-130250-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-baatkaro-dev-130250-deployment",
+      "UnauthRoleName": "amplify-baatkaro-dev-130250-unauthRole",
+      "StackName": "amplify-baatkaro-dev-130250",
+      "StackId": "arn:aws:cloudformation:ap-south-1:422187193745:stack/amplify-baatkaro-dev-130250/4ac3b050-a018-11eb-95e5-0a800ab8a1f0",
+      "AmplifyAppId": "dkujvpqwgui3u"
+    },
+    "categories": {
+      "auth": {
+        "baatkaro98dc6038": {}
+      }
+    }
+  },
+  "master": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-baatkaro-master-151548-authRole",
+      "UnauthRoleArn": "arn:aws:iam::422187193745:role/amplify-baatkaro-master-151548-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::422187193745:role/amplify-baatkaro-master-151548-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-baatkaro-master-151548-deployment",
+      "UnauthRoleName": "amplify-baatkaro-master-151548-unauthRole",
+      "StackName": "amplify-baatkaro-master-151548",
+      "StackId": "arn:aws:cloudformation:ap-south-1:422187193745:stack/amplify-baatkaro-master-151548/dcb0d8a0-a02a-11eb-a483-065011102e70",
+      "AmplifyAppId": "dkujvpqwgui3u"
+    },
+    "categories": {
+      "auth": {
+        "baatkaro98dc6038": {}
+      }
+    }
+  }
+}

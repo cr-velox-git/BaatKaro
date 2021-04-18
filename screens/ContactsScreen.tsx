@@ -6,8 +6,6 @@ import { FlatList } from 'react-native-gesture-handler';
 import ContactListItems from '../components/ContactsListItem';
 
 
-
-
 export default function ChatScreen() {
   return (
     <View style={styles.container}>

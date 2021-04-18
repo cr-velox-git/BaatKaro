@@ -1,23 +1,30 @@
 import React from 'react';
 import { View } from 'react-native';
 import style from './style';
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const NewMessageButton = () => {
-    
+
     const navigation = useNavigation();
 
     const onPress = () => {
-        navigation.navigate('Contacts');
+        navigation.navigate('ContactsScreen');
     }
     return (
-        <TouchableOpacity onPress={onPress}>
-            <View style={style.container}>
-                <MaterialCommunityIcons name='message-reply-text' size={35} color={'white'} />
-            </View>
-        </TouchableOpacity>
+
+        <View style={style.container}>
+            <TouchableOpacity onPress={onPress}>
+                <MaterialCommunityIcons
+                    name='message-reply-text'
+                    size={35}
+                    color={'white'} />
+            </TouchableOpacity>
+        </View>
+
+
+
 
     )
 }

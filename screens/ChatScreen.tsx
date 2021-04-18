@@ -5,13 +5,13 @@ import ChatListItem from '../components/ChatListItem';
 import ChatRooms from '../data/ChatRooms';
 
 import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import NewMessageButton from '../components/NewMessageButton';
 
 
 
 
 export default function ChatScreen() {
+
 
   return (
     <View style={styles.container}>
@@ -21,9 +21,11 @@ export default function ChatScreen() {
         renderItem={({ item }) => <ChatListItem chatRoom={item} />}
         keyExtractor={(item) => item.id}
       />
-     
-      <NewMessageButton />
-     
+
+        <NewMessageButton />
+
+
+
     </View>
   );
 }
