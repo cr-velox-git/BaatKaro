@@ -7,11 +7,36 @@ import ChatRooms from '../data/ChatRooms';
 import { useNavigation } from '@react-navigation/native';
 import NewMessageButton from '../components/NewMessageButton';
 
-
+import {API, graphqlOperation, Auth} from 'aws-amplify';
+import { useEffect } from 'react';
+import {getUser} from './queries'
+import { useState } from 'react';
 
 
 export default function ChatScreen() {
 
+const [chatRooms, setChatRoom]  = useState([]);
+
+useEffect(() => {
+  const fetchChatRoom = async () =>{
+
+    try {
+      const userInfo = await Auth.currentAuthenticatedUser();
+      const userData=await API.graphql(
+
+        //already authenticated so not checking again
+        graphqlOperation(
+          getUser, {id: userInfo.attributes.sub}
+        )
+      )
+
+      setChatRoom(userData.data.getUser.getChatRoomUser.items);
+      console.log(userData);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}, [])
 
   return (
     <View style={styles.container}>

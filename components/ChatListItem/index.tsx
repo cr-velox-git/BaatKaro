@@ -7,6 +7,8 @@ import styles from './style';
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
+import { Auth } from 'aws-amplify';
+import { useEffect, useState } from 'react';
 
 export type ChatListItemsProps = {
     chatRoom: ChatRoom;
@@ -14,29 +16,45 @@ export type ChatListItemsProps = {
 
 const ChatListItems = (props: ChatListItemsProps) => {
     const { chatRoom } = props;
+    const [otherUser, setOtherUser] = useState(null);
 
     const navigation = useNavigation();
 
-    const user = chatRoom.users[1];
+    const user = chatRoom.chatRoomUsers.item.users[0].user;
+
+    useEffect(() => {
+        const getOtherUser = async () => {
+            const userInfo = await Auth.currentAuthenticatedUser();
+            if (chatRoom.chatRoomUsers.item[0].user.id === userInfo.attributes.sub) {
+                setOtherUser(chatRoom.chatRoomUsers.item.users[1].user);
+            } else {
+                setOtherUser(chatRoom.chatRoomUsers.item.users[0].user);
+            }
+        }
+    }, [])
 
     const onCLick = () => {
-        navigation.navigate('ChatRoomScreen', { 
+        navigation.navigate('ChatRoomScreen', {
             id: chatRoom.id,
-            name: user.name,
+            name: otherUser.name,
         })
         // console.log(chatRoom.id);
     }
 
+if(!otherUser){
+    return null;
+}
+
     return (
-        <TouchableWithoutFeedback onPress = {onCLick}>
+        <TouchableWithoutFeedback onPress={onCLick}>
             <View style={styles.container}>
                 <View style={styles.lefContainer}>
-                    <Image source={{uri: user.imageUri }} style={styles.avatar} />
+                    <Image source={{ uri: otherUser.imageUri }} style={styles.avatar} />
                     <View style={styles.midContainer}>
-                        <Text style={styles.userName}>{user.name}</Text>
+                        <Text style={styles.userName}>{otherUser.name}</Text>
                         {/* <View style={styles.messageLine}>
                             <Ionicons name="checkmark-done" size={17} color="blue" /> */}
-                            <Text style={styles.lastMessage}>{chatRoom.lastMessage.content}</Text>
+                        <Text style={styles.lastMessage}>{chatRoom.lastMessage.content}</Text>
                         {/* </View> */}
                     </View>
                 </View>
