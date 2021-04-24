@@ -1,12 +1,17 @@
-import React from 'react'
-import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
-import styles from './style';
-import moment from 'moment';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableWithoutFeedback
+} from "react-native";
+import { ChatRoom } from "../../types";
+import styles from "./style";
+import moment from "moment";
 import { useNavigation } from '@react-navigation/native';
-import { Auth } from 'aws-amplify';
-import { useEffect, useState } from 'react';
-import { ChatRoom } from '../../types';
-
+import {
+  Auth,
+} from 'aws-amplify';
 
 export type ChatListItemsProps = {
     chatRoom: ChatRoom;
@@ -17,7 +22,7 @@ const ChatListItems = (props: ChatListItemsProps) => {
     const [otherUser, setOtherUser] = useState(null);
 
     const navigation = useNavigation();
-    const user = chatRoom.chatRoomUsers.item.users[0].user;
+    // const user = chatRoom.chatRoomUsers.item.users[0].user;
 
     useEffect(() => {
         const getOtherUser = async () => {
