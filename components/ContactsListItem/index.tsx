@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
-import { Users } from "../../types"
+import { User } from "../../types"
 import styles from './style';
 
 import { useNavigation } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { API, graphqlOperation, Auth } from 'aws-amplify';
 import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations';
 
 export type ChatListItemsProps = {
-    user: Users;
+    user: User;
 }
 
 const ContactListItems = (props: ChatListItemsProps) => {
@@ -38,7 +38,7 @@ const ContactListItems = (props: ChatListItemsProps) => {
             await API.graphql(
                 graphqlOperation(
                     createChatRoomUser, {
-                    inpute: {
+                    input: {
                         userID: user.id,
                         chatRoomID: newChatRoom.id,
                     } 
@@ -52,7 +52,7 @@ const ContactListItems = (props: ChatListItemsProps) => {
                 graphqlOperation(
                     createChatRoomUser, {
                     input: {
-                        userID: userInfo.attribute.sub,
+                        userID: userInfo.attributes.sub,
                         chatRoomID: newChatRoom.id,
                     }
                 }
@@ -69,7 +69,7 @@ const ContactListItems = (props: ChatListItemsProps) => {
         }
     }
 
-    return (
+    return ( 
 
         <View style={styles.container}>
             <TouchableWithoutFeedback onPress={onCLick}>

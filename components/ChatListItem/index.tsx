@@ -1,14 +1,12 @@
 import React from 'react'
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
-import ChatRooms from '../../data/ChatRooms';
-import Users from '../../data/Users';
-import { ChatRoom } from "../../types"
 import styles from './style';
-import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
+import { ChatRoom } from '../../types';
+
 
 export type ChatListItemsProps = {
     chatRoom: ChatRoom;
@@ -19,7 +17,6 @@ const ChatListItems = (props: ChatListItemsProps) => {
     const [otherUser, setOtherUser] = useState(null);
 
     const navigation = useNavigation();
-
     const user = chatRoom.chatRoomUsers.item.users[0].user;
 
     useEffect(() => {
@@ -31,6 +28,7 @@ const ChatListItems = (props: ChatListItemsProps) => {
                 setOtherUser(chatRoom.chatRoomUsers.item.users[0].user);
             }
         }
+        getOtherUser();
     }, [])
 
     const onCLick = () => {
@@ -54,12 +52,12 @@ if(!otherUser){
                         <Text style={styles.userName}>{otherUser.name}</Text>
                         {/* <View style={styles.messageLine}>
                             <Ionicons name="checkmark-done" size={17} color="blue" /> */}
-                        <Text style={styles.lastMessage}>{chatRoom.lastMessage.content}</Text>
+                        <Text numberOfLines={2} style={styles.lastMessage}>{chatRoom.lastMessage ? chatRoom.lastMessage.content : ""}</Text>
                         {/* </View> */}
                     </View>
                 </View>
                 <Text style={styles.time}>
-                    {moment(chatRoom.lastMessage.createdAT).format("DD/MM/YY")}
+                    {chatRoom.lastMessage && moment(chatRoom.lastMessage.createdAT).format("DD/MM/YY")}
                 </Text>
             </View>
         </TouchableWithoutFeedback>

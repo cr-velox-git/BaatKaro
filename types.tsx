@@ -34,22 +34,23 @@ export type CallsParamList = {
   TabTwoScreen: undefined;
 };
 
-export type Users = {
+export type User = {
 id: String;
 name: string;
 imageUri: String;
 status: String;
 }
 
+
 export type Message = {
   id: String;
   content: string;
-  createdAT: string;
-  user: Users;
+  createdAt: string;
+  user: User;
 }
 
 export type ChatRoom = {
   id: String;
-  users: Users[];
+  users: User[];
   lastMessage: Message;
 }
